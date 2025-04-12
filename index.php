@@ -8,7 +8,6 @@ include 'includes/header.php';
 
 <h3>Bài viết mới nhất</h3>
 <?php
-// Lấy 5 bài viết mới nhất
 $stmt = $conn->prepare("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id ORDER BY created_at DESC LIMIT 5");
 $stmt->execute();
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -17,9 +16,12 @@ if ($posts) {
     foreach ($posts as $post) {
         echo '<div class="post">';
         echo '<h4>' . htmlspecialchars($post['title']) . '</h4>';
+        if ($post['image']) {
+            echo '<img src="' . htmlspecialchars($post['image']) . '" alt="Hình ảnh bài viết" class="post-image">';
+        }
         echo '<p>' . nl2br(htmlspecialchars(substr($post['content'], 0, 200))) . '...</p>';
         echo '<p><small>Bởi ' . htmlspecialchars($post['username']) . ' vào ' . $post['created_at'] . '</small></p>';
-        echo '<p><a href="posts.php">Đọc thêm</a></p>';
+        echo '<p><a href="post_detail.php?id=' . $post['id'] . '">Đọc thêm</a></p>';
         echo '</div>';
     }
 } else {

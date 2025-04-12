@@ -26,13 +26,20 @@ if ($_SESSION['role'] !== 'admin' && $post['user_id'] !== $_SESSION['user_id']) 
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Xóa hình ảnh (nếu có)
+    if ($post['image'] && file_exists($post['image'])) {
+        unlink($post['image']);
+    }
+
+    // Xóa bình luận liên quan
     $stmt = $conn->prepare("DELETE FROM comments WHERE post_id = :post_id");
     $stmt->execute(['post_id' => $post_id]);
     
+    // Xóa bài viết
     $stmt = $conn->prepare("DELETE FROM posts WHERE id = :id");
     $stmt->execute(['id' => $post_id]);
     
-    echo '<div class="alert alert-success">Xóa bài viết thành công! <a href="posts.php">Quay lại</a></div>';
+    echo '<div class="alert alert-success">Xóa bài viết thành công! <a href="posts.php">Quay lại danh sách bài viết</a></div>';
     include 'includes/footer.php';
     exit;
 }

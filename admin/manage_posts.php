@@ -18,6 +18,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <th>ID</th>
             <th>Tiêu đề</th>
+            <th>Hình ảnh</th>
             <th>Tác giả</th>
             <th>Ngày tạo</th>
             <th>Hành động</th>
@@ -28,6 +29,13 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <td><?php echo $post['id']; ?></td>
                 <td><?php echo htmlspecialchars($post['title']); ?></td>
+                <td>
+    <?php if ($post['image']): ?>
+        <img src="<?php echo htmlspecialchars($post['image']); ?>" alt="Hình ảnh bài viết" class="post-image" style="max-width: 100px;">
+    <?php else: ?>
+        Không có
+    <?php endif; ?>
+</td>
                 <td><?php echo htmlspecialchars($post['username']); ?></td>
                 <td><?php echo $post['created_at']; ?></td>
                 <td>

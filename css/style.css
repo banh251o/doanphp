@@ -252,3 +252,11 @@ nav ul li a:hover {
 .post a:hover {
     text-decoration: underline;
 }
+.post-image {
+    max-width: 300px; /* Giảm kích thước hình ảnh xuống 300px */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: block;
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+}
