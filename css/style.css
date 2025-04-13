@@ -1066,3 +1066,353 @@ footer {
         font-size: 1.3rem;
     }
 }
+/* Add Post Section */
+.add-post-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e6e6fa 100%); /* Gradient nhẹ */
+    min-height: 100vh; /* Đảm bảo chiều cao tối thiểu */
+    display: flex;
+    align-items: center;
+}
+
+.add-post-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.add-post-wrapper h2 {
+    font-size: 2.5rem;
+    color: #4b0082;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Form Styling */
+.add-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4b0082;
+}
+
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4b0082;
+    box-shadow: 0 0 5px rgba(75, 0, 130, 0.2);
+    outline: none;
+}
+
+textarea.form-control {
+    resize: vertical; /* Chỉ cho phép thay đổi chiều cao */
+    min-height: 150px;
+}
+
+/* Custom File Upload */
+.custom-file-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-control-file {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.file-name {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Form Buttons */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, #4b0082, #6a0dad);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(90deg, #6a0dad, #4b0082);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: #f1f1f1;
+    color: #333;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #e1e1e1;
+    transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .add-post-wrapper {
+        padding: 1.5rem;
+    }
+
+    .add-post-wrapper h2 {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}
+/* Login Section */
+.login-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e6e6fa 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.login-wrapper h2 {
+    font-size: 2.5rem;
+    color: #4b0082;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Login Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4b0082;
+}
+
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4b0082;
+    box-shadow: 0 0 5px rgba(75, 0, 130, 0.2);
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, #4b0082, #6a0dad);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(90deg, #6a0dad, #4b0082);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: #f1f1f1;
+    color: #333;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #e1e1e1;
+    transform: translateY(-2px);
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+.register-link a {
+    color: #4b0082;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    color: #6a0dad;
+}
+
+/* Logout Section */
+.logout-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e6e6fa 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.logout-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.logout-wrapper h2 {
+    font-size: 2.5rem;
+    color: #4b0082;
+    margin-bottom: 0.5rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-wrapper,
+    .logout-wrapper {
+        padding: 1.5rem;
+    }
+
+    .login-wrapper h2,
+    .logout-wrapper h2 {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}
