@@ -1483,3 +1483,71 @@ textarea.form-control {
         font-size: 2rem;
     }
 }
+/* Edit Post Section */
+.edit-post-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e6e6fa 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.edit-post-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.edit-post-wrapper h2 {
+    font-size: 2.5rem;
+    color: #4b0082;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Edit Post Form */
+.edit-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Current Image */
+.current-image {
+    margin-bottom: 1rem;
+}
+
+.current-image p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.current-image img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .edit-post-wrapper {
+        padding: 1.5rem;
+    }
+
+    .edit-post-wrapper h2 {
+        font-size: 2rem;
+    }
+}
