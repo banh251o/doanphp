@@ -1551,3 +1551,127 @@ textarea.form-control {
         font-size: 2rem;
     }
 }
+/* Edit Profile Section */
+.edit-profile-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e6e6fa 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.edit-profile-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.edit-profile-wrapper h2 {
+    font-size: 2.5rem;
+    color: #4b0082;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Edit Profile Form */
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-size: 1.1rem;
+    color: #4b0082;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4b0082;
+    box-shadow: 0 0 5px rgba(75, 0, 130, 0.2);
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-submit, .btn-cancel {
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, #4b0082, #6a0dad);
+    color: white;
+    border: none;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(90deg, #6a0dad, #4b0082);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: #ddd;
+    color: #555;
+    border: none;
+}
+
+.btn-cancel:hover {
+    background: #ccc;
+    transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .edit-profile-wrapper {
+        padding: 1.5rem;
+    }
+
+    .edit-profile-wrapper h2 {
+        font-size: 2rem;
+    }
+}
