@@ -57,28 +57,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Xử lý upload hình ảnh mới
         if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-            $max_file_size = 2 * 1024 * 1024; // 2MB
-            if ($_FILES['image']['size'] > $max_file_size) {
+            $allowed_types = ['image/jpeg', 'image/png'];
+            if (!in_array($_FILES['image']['type'], $allowed_types)) {
                 echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        Hình ảnh quá lớn (tối đa 2MB). Vui lòng chọn file nhỏ hơn.
+                        Chỉ hỗ trợ định dạng JPG hoặc PNG.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>';
             } else {
-                $target_dir = "uploads/posts/";
-                if (!file_exists($target_dir)) {
-                    mkdir($target_dir, 0777, true);
-                }
-                $target_file = $target_dir . basename($_FILES["image"]["name"]);
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                    if ($image && file_exists($image)) {
-                        unlink($image);
-                    }
-                    $image = $target_file;
-                } else {
+                $max_file_size = 2 * 1024 * 1024; // 2MB
+                if ($_FILES['image']['size'] > $max_file_size) {
                     echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Lỗi khi upload hình ảnh. Vui lòng thử lại.
+                            Hình ảnh quá lớn (tối đa 2MB). Vui lòng chọn file nhỏ hơn.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                           </div>';
+                } else {
+                    $target_dir = "uploads/posts/";
+                    if (!file_exists($target_dir)) {
+                        mkdir($target_dir, 0777, true);
+                    }
+                    $target_file = $target_dir . time() . '_' . basename($_FILES["image"]["name"]); // Thêm timestamp để tránh trùng tên
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                        if ($image && file_exists($image)) {
+                            unlink($image);
+                        }
+                        $image = $target_file;
+                    } else {
+                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Lỗi khi upload hình ảnh. Vui lòng thử lại.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>';
+                    }
                 }
             }
         }
@@ -132,8 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     <?php endif; ?>
                     <div class="custom-file-upload">
-                        <input type="file" id="image" name="image" class="form-control-file" accept="image/*">
-                        <span class="file-name"><?php echo $post['image'] ? 'Thay đổi hình ảnh...' : 'Chưa chọn file...'; ?></span>
+                        <label for="image" class="btn btn-primary btn-change-image">Thay đổi hình ảnh</label>
+                        <input type="file" id="image" name="image" accept="image/*" style="display: none;">
+                        <span class="file-name"><?php echo $post['image'] ? basename($post['image']) : 'Chưa chọn file...'; ?></span>
                     </div>
                 </div>
                 <div class="form-buttons">
@@ -146,15 +155,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </section>
 
 <script>
-// Preview hình ảnh
+// Xử lý khi chọn file hình ảnh
 document.getElementById('image').addEventListener('change', function(e) {
     const fileName = e.target.files.length > 0 ? e.target.files[0].name : 'Chưa chọn file...';
     document.querySelector('.file-name').textContent = fileName;
 
     const previewImg = document.getElementById('image-preview');
-    if (e.target.files.length > 0 && previewImg) {
+    if (e.target.files.length > 0) {
         const file = e.target.files[0];
-        previewImg.src = URL.createObjectURL(file);
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            if (previewImg) {
+                previewImg.src = event.target.result;
+            } else {
+                // Nếu không có hình ảnh hiện tại, tạo thẻ img mới
+                const img = document.createElement('img');
+                img.id = 'image-preview';
+                img.className = 'preview-img';
+                img.src = event.target.result;
+                document.querySelector('.current-image')?.remove(); // Xóa hình ảnh cũ nếu có
+                const currentImageDiv = document.createElement('div');
+                currentImageDiv.className = 'current-image';
+                currentImageDiv.appendChild(img);
+                document.querySelector('.form-group').insertBefore(currentImageDiv, document.querySelector('.form-check') || document.querySelector('.custom-file-upload'));
+            }
+        };
+        reader.readAsDataURL(file);
     }
 });
 </script>

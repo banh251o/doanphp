@@ -2378,3 +2378,59 @@ body {
         max-width: 200px;
     }
 }
+/* Custom File Upload */
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-change-image {
+    background: linear-gradient(90deg, #4b0082, #6a0dad);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-change-image:hover {
+    background: linear-gradient(90deg, #6a0dad, #4b0082);
+    transform: translateY(-2px);
+}
+
+.file-name {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Current Image */
+.current-image {
+    margin-bottom: 1rem;
+}
+
+.preview-img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .custom-file-upload {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-change-image {
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    .preview-img {
+        max-width: 150px;
+    }
+}
