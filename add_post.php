@@ -1,74 +1,78 @@
-<?php
+<?php 
+session_start(); // Bắt đầu session
 include 'includes/db_connect.php';
 include 'includes/header.php';
 
+// Kiểm tra xem người dùng đã đăng nhập hay chưa
 if (!isset($_SESSION['user_id'])) {
+    // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
     header("Location: login.php");
-    exit;
+    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Xử lý đăng bài
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $user_id = $_SESSION['user_id'];
-    $image_path = NULL;
+    $image = '';
+    $user_id = $_SESSION['user_id']; // Lấy user_id từ session
 
-    // Xử lý tải lên hình ảnh
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-        $max_size = 5 * 1024 * 1024; // 5MB
-
-        $file_type = $_FILES['image']['type'];
-        $file_size = $_FILES['image']['size'];
-        $file_tmp = $_FILES['image']['tmp_name'];
-
-        // Kiểm tra định dạng và kích thước
-        if (in_array($file_type, $allowed_types) && $file_size <= $max_size) {
-            $file_name = 'post_' . time() . '_' . $_FILES['image']['name'];
-            $image_path = 'images/uploads/' . $file_name;
-
-            // Di chuyển file vào thư mục uploads
-            if (move_uploaded_file($file_tmp, $image_path)) {
-                // Tải lên thành công
-            } else {
-                echo '<div class="alert alert-error">Lỗi khi tải lên hình ảnh!</div>';
-                $image_path = NULL;
-            }
+    // Xử lý upload hình ảnh
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $target_dir = "uploads/";
+        // Kiểm tra và tạo thư mục uploads nếu chưa tồn tại
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $image = $target_file;
         } else {
-            echo '<div class="alert alert-error">Hình ảnh không đúng định dạng hoặc quá lớn (tối đa 5MB)!</div>';
+            echo '<div class="alert alert-danger">Lỗi khi upload hình ảnh. Vui lòng thử lại.</div>';
         }
     }
 
-    // Lưu bài viết vào database
-    try {
-        $stmt = $conn->prepare("INSERT INTO posts (title, content, user_id, image) VALUES (:title, :content, :user_id, :image)");
-        $stmt->execute([
-            'title' => $title,
-            'content' => $content,
-            'user_id' => $user_id,
-            'image' => $image_path
-        ]);
-        // Lấy ID của bài viết vừa thêm
-$post_id = $conn->lastInsertId();
-echo '<div class="alert alert-success">Bài viết đã được đăng thành công! <a href="post_detail.php?id=' . $post_id . '">Xem bài viết</a></div>';
-    } catch (PDOException $e) {
-        echo '<div class="alert alert-error">Lỗi: ' . $e->getMessage() . '</div>';
+    // Lưu bài viết vào cơ sở dữ liệu
+    $sql = "INSERT INTO posts (title, content, image, user_id, created_at) VALUES (?, ?, ?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $title, PDO::PARAM_STR);
+    $stmt->bindValue(2, $content, PDO::PARAM_STR);
+    $stmt->bindValue(3, $image, PDO::PARAM_STR);
+    $stmt->bindValue(4, $user_id, PDO::PARAM_INT);
+    
+    if ($stmt->execute()) {
+        echo '<div class="alert alert-success">Bài viết đã được đăng thành công! <a href="posts.php">Xem bài viết</a></div>';
+    } else {
+        echo '<div class="alert alert-danger">Có lỗi xảy ra khi đăng bài. Vui lòng thử lại.</div>';
     }
 }
 ?>
 
-<h2>Đăng bài mới</h2>
-<form method="POST" enctype="multipart/form-data">
-    <label for="title">Tiêu đề:</label>
-    <input type="text" id="title" name="title" required>
-    
-    <label for="content">Nội dung:</label>
-    <textarea id="content" name="content" rows="5" required></textarea>
-    
-    <label for="image">Hình ảnh (tùy chọn):</label>
-    <input type="file" id="image" name="image" accept="image/*">
-    
-    <button type="submit">Đăng bài</button>
-</form>
+<!-- Add Post Section -->
+<section class="add-post-section">
+    <div class="container">
+        <h2>Đăng bài mới</h2>
+        <p>Chia sẻ kiến thức và kinh nghiệm của bạn về PHP với cộng đồng!</p>
+        
+        <form method="POST" enctype="multipart/form-data" class="add-post-form">
+            <div class="form-group">
+                <label for="title">Tiêu đề:</label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="Nhập tiêu đề bài viết" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Nội dung:</label>
+                <textarea id="content" name="content" class="form-control" rows="6" placeholder="Nhập nội dung bài viết" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Hình ảnh (tùy chọn):</label>
+                <input type="file" id="image" name="image" class="form-control-file">
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary btn-submit">Đăng bài</button>
+                <a href="posts.php" class="btn btn-cancel">Hủy</a>
+            </div>
+        </form>
+    </div>
+</section>
 
 <?php include 'includes/footer.php'; ?>

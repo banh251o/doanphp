@@ -728,3 +728,211 @@ footer {
         font-size: 1rem;
     }
 }
+.login-section {
+    padding: 3rem 0;
+    background-color: #f9f9f9;
+}
+
+.login-section h2 {
+    font-size: 2.5rem;
+    color: #4b0082;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.login-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+/* Form Buttons Container */
+.form-buttons {
+    display: flex;
+    gap: 1rem; /* Khoảng cách giữa các nút */
+    justify-content: center; /* Căn giữa */
+}
+
+/* Cancel Button */
+.btn-cancel {
+    display: block;
+    width: 100%;
+    max-width: 150px; /* Giới hạn chiều rộng */
+    padding: 0.75rem;
+    background: #ccc; /* Màu xám */
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: #b3b3b3; /* Xám đậm hơn khi hover */
+}
+
+/* Điều chỉnh nút Đăng bài để đồng bộ */
+.btn-submit {
+    max-width: 150px; /* Giới hạn chiều rộng giống nút Hủy */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-buttons {
+        flex-direction: column; /* Xếp dọc trên mobile */
+        gap: 0.5rem;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        max-width: 100%; /* Trải rộng trên mobile */
+    }
+}
+/* Posts Section */
+.posts-section {
+    padding: 3rem 0;
+    background-color: #f9f9f9; /* Nền sáng */
+}
+
+.posts-section h2 {
+    font-size: 2.5rem;
+    color: #4b0082; /* Màu tím */
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.posts-section p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Posts Grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột bằng nhau */
+    gap: 2rem; /* Khoảng cách giữa các ô */
+}
+
+/* Post Item */
+.post-item {
+    background: white;
+    border-radius: 10px; /* Bo góc */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Thêm bóng */
+    overflow: hidden; /* Ẩn phần thừa của hình ảnh */
+    transition: transform 0.3s ease; /* Hiệu ứng hover */
+}
+
+.post-item:hover {
+    transform: translateY(-5px); /* Nâng lên khi hover */
+}
+
+/* Post Image */
+.post-image img {
+    width: 100%;
+    height: 200px; /* Chiều cao cố định */
+    object-fit: cover; /* Đảm bảo hình ảnh không méo */
+    display: block;
+}
+
+/* Post Content */
+.post-content {
+    padding: 1.5rem;
+}
+
+.post-content h3 {
+    font-size: 1.5rem;
+    color: #4b0082; /* Màu tím */
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.post-content p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+/* Post Actions */
+.post-actions {
+    display: flex;
+    gap: 0.5rem; /* Khoảng cách giữa các nút */
+    flex-wrap: wrap; /* Cho phép nút xuống dòng nếu không đủ chỗ */
+}
+
+/* Buttons */
+.btn-read-more {
+    background: linear-gradient(90deg, #4b0082, #6a0dad); /* Gradient tím */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.btn-read-more:hover {
+    background: linear-gradient(90deg, #6a0dad, #4b0082); /* Đảo gradient khi hover */
+}
+
+.btn-action {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.btn-edit {
+    background: #28a745; /* Màu xanh lá */
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #218838; /* Xanh đậm hơn khi hover */
+}
+
+.btn-delete {
+    background: #dc3545; /* Màu đỏ */
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333; /* Đỏ đậm hơn khi hover */
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột trên tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .posts-grid {
+        grid-template-columns: 1fr; /* 1 cột trên mobile */
+    }
+
+    .post-image img {
+        height: 250px; /* Tăng chiều cao hình ảnh trên mobile */
+    }
+
+    .post-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .post-actions {
+        justify-content: center; /* Căn giữa các nút trên mobile */
+    }
+}

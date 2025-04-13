@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Kiểm tra xem session đã được khởi động chưa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
